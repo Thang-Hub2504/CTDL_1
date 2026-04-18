@@ -2,7 +2,7 @@
 #include<conio.h>
 void ISS(int a[50], int n);
 int binarysearch(int a[], int n, int x);
-
+int ManyX(int a[50], int n, int x, int i);
 int main()
 {
     int a[10], x, n, i;
@@ -40,7 +40,7 @@ int main()
         {
             printf("\nKhong tim thay x trong mang.\n");
         }
-
+	ManyX(a,n,x,i);
     return 0;
 }
 
@@ -75,6 +75,21 @@ int binarysearch(int a[], int n, int x)
                     right = middle -1;
                 else 
                 left = middle +1;
-    }while(left<=right);
+    }
+	while(left<=right);
     return -1;
+}
+
+int ManyX(int a[50], int n, int x, int i)
+{
+	int dem=0;
+	for(i=0;i<n;i++)
+	{
+		if(a[i]==x)
+		{
+			dem++;
+		}
+	}
+	printf("So lan %d xuat hien la: %d", x, dem);
+	return 0;
 }
