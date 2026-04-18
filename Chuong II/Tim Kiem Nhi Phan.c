@@ -1,25 +1,33 @@
 #include<stdio.h>
-
+#include<conio.h>
+void ISS(int a[50], int n);
 int binarysearch(int a[], int n, int x);
 
 int main()
 {
-    int a[10], x, n;
+    int a[10], x, n, i;
     printf("nhap so phan tu mang a: ");
     scanf("%d",&n);
 
-    for(int i=0;i<n ;i++)
+    for(i=0;i<n ;i++)
     {   
         printf("a[%d]= ", i);
         scanf("%d", &a[i]);
     }
+    
     printf("mang vua nhap la: ");
-
-    for(int i=0;i<n;i++)
+    for(i=0;i<n;i++)
     {
         printf("\t%d", a[i]);
     }
 
+	ISS(a,n);
+		printf("\nPhan tu sau khi sap xep la:\t");
+		for(i=0;i<n;i++)
+		{		
+			printf("%d\t",a[i]);
+		}
+		
     printf("\nNhap x de tim: ");
     scanf("%d", &x);
 
@@ -34,6 +42,22 @@ int main()
         }
 
     return 0;
+}
+
+void ISS(int a[50], int n)
+{
+	int pos, i, x;
+	for(i=1; i<n; i++)
+	{
+		x=a[i];
+		pos=i-1;
+		while(pos>=0 && a[pos]>x)
+		{
+			a[pos+1]=a[pos];
+			pos--;
+		}
+		a[pos+1]=x;
+	}
 }
 
 int binarysearch(int a[], int n, int x)
