@@ -4,8 +4,7 @@
 #include<stdlib.h>
 
 typedef struct SNNode{
-	int So_duong;
-	int So_am;
+	int So_nguyen;
 	SNNode* pNext;
 }SNNode;
 
@@ -16,9 +15,8 @@ typedef struct List{
 
 void    AddFirst(List &l, SNNode* new_ele);
 void    AddTail (List &l, SNNode* new_ele);
-List    NhapSoNguyen();
+void    NhapThemSoNguyen(List &l);
 void    Xuat(List ds);
-void    PrintList(List &l);
 
 int main()
 {	
@@ -28,27 +26,51 @@ int main()
 	danhsach.pHead = NULL;
 	danhsach.pTail = NULL;
 	
+	int soCodinh[] = {1, 2, 3, 4, 5};
+    for(int i = 0; i < 5; i++)
+    {
+        SNNode* node = (SNNode*)malloc(sizeof(SNNode));
+        node->pNext = NULL;
+        node->So_nguyen = soCodinh[i];
+        AddTail(danhsach, node);
+    }
+    printf("Da khoi tao danh sach voi 5 so co dinh!\n");
+	
 do
 {
-	printf("--------Vui long chon-----------------\n");
-	printf("  Lua chon 1: Nhap danh sach          \n");
-	printf("  Lua chon 2: Bo sung vao cuoi        \n");
-	printf("  Lua chon 3: Dem so luong phan tu    \n");
-	printf("  Lua chon 4: In danh sach            \n");
-	printf("--------------------------------------\n");
+	printf("\n--------Vui long chon-----------------\n");
+	printf("  Lua chon 1: Nhap danh sach           \n");
+	printf("  Lua chon 2: Bo sung vao cuoi         \n");
+	printf("  Lua chon 3: Dem so luong phan tu     \n");
+	printf("  Lua chon 4: In danh sach             \n");
+	printf("---------------------------------------\n");
 	printf("Chon lua chon: ");
-	scanf("%c",&luachon);
+	scanf(" %c",&luachon);
 	
 	
 	switch(luachon)
 	{
 		case '1':
-			danhsach = NhapSoNguyen();
+			NhapThemSoNguyen(danhsach);
 			break;
 		case '2':
+		{
+			SNNode* node = (SNNode*)malloc(sizeof(SNNode));
+			node->pNext = NULL;
+			printf("Nhap so nguyen can them vao cuoi: ");
+			scanf("%d", &(node->So_nguyen));
+			AddTail(danhsach, node);
+			printf("Da them thanh cong!\n");
 			break;
+		}
 		case '3':
+			{
+			int dem = 0;
+			SNNode* p = danhsach.pHead;
+			while(p != NULL) { dem++; p = p->pNext; }
+			printf("So luong phan tu: %d\n", dem);
 			break;
+			}
 		case '4':
 			Xuat(danhsach);
 			break;
@@ -61,6 +83,24 @@ do
 	return 0;
 }
 
+void NhapThemSoNguyen(List &l)
+{
+	int n;
+	printf("Nhap so luong so nguyen muon them: ");
+	scanf("%d", &n);
+
+	for(int i = 1; i <= n; i++)
+	{
+		SNNode* node = (SNNode*)malloc(sizeof(SNNode));
+		node->pNext = NULL;
+		printf("Phan tu %d - Nhap so nguyen: ", i);
+		scanf("%d", &(node->So_nguyen));
+		AddTail(l, node);
+	}
+	printf("Da them %d phan tu vao danh sach!\n", n);
+}
+
+
 void AddFirst(List &l, SNNode* new_ele)
 {
 	if(l.pHead == NULL)
@@ -70,7 +110,7 @@ void AddFirst(List &l, SNNode* new_ele)
 	}
 	else
 	{
-		new_ele->pNext = l.pHead;
+		new_ele -> pNext = l.pHead;
 		l.pHead = new_ele;
 	}
 }
@@ -89,40 +129,13 @@ void AddTail(List &l, SNNode* new_ele)
 	}	
 }
 
-List NhapSoNguyen()
-{
-    List danhsach;
-    danhsach.pHead = NULL;
-    danhsach.pTail = NULL;
-
-    int n;
-    printf("Nhap so luong so nguyen: ");
-    scanf("%d", &n);
-
-    for(int i = 1; i <= n; i++)
-    {
-        SNNode* node = (SNNode*)malloc(sizeof(SNNode));
-        node->pNext  = NULL;
-
-        printf("Phan tu %d - Nhap so duong: ", i);
-        scanf("%d", &node->So_duong);
-
-        printf("Phan tu %d - Nhap so am  : ", i);
-        scanf("%d", &node->So_am);
-
-        AddTail(danhsach, node);
-    }
-
-    return danhsach;
-}
-
 void PrintList(List &l)
 {
     SNNode* p = l.pHead;
     while(p != NULL)
     {
-        printf("So duong: %d | So am: %d\n", p->So_duong, p->So_am);
-        p = p->pNext;
+        printf("So nguyen: %d\n", p->So_nguyen);
+        p = p -> pNext;
     }
 }
 
@@ -131,7 +144,7 @@ void Xuat(List ds)
     SNNode* p = ds.pHead;
     while(p != NULL)
     {
-        printf("So duong: %d | So am: %d\n", p->So_duong, p->So_am);
+        printf("So nguyen: %d\n", p->So_nguyen);
         p = p->pNext;
     }
 }
