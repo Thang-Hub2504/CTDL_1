@@ -12,8 +12,8 @@ typedef struct SinhVien
 
 typedef struct List
 {
-	SinhVien* pHead;
-	SinhVien* pTail;
+	SVNode* pHead;
+	SVNode* pTail;
 }List;
 
 void AddFirst(List &l, SinhVien* new_ele);
@@ -61,4 +61,18 @@ int main()
 	getch();
 	return 0;
 }
+
+void Nhapthemsinhvien(List &l)
+{
+	int n;
+	printf("Nhap so luong sinh vien muon them: ");
+	scanf("%d",&n);
+	{
+		for(int i=0;i<n;i++)
+		{
+			
+		}
+	}
+}
+
 
